@@ -35,4 +35,5 @@ message UserResponse {
   string username   = 2; // Username of the user
   string email      = 3; // Email of the user
   string avatar_url = 4; // Url on avatar of the user
+  string create_at = 5; // ISO 8601 timestamp (e.g., "2025-06-28T19:00:00Z")
 }

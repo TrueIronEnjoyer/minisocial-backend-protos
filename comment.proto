@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package comment;
+
+// gRPC service for managing comments
+service CommentService {
+  // Creates a new comment on a post
+  rpc CreateComment (CreateCommentRequest) returns (CommentResponse);
+
+  // Retrieves a specific comment by its ID
+  rpc GetComment (GetCommentRequest) returns (CommentResponse);
+
+  // Retrieves all comments associated with a post
+  rpc GetPostComments (GetPostCommentsRequest) returns (CommentListResponse);
+}
+
+// Represents a request to create a new comment
+message CreateCommentRequest {
+  string post_id   = 1; // ID of the post the comment is for
+  string user_id   = 2; // ID of the user creating the comment
+  string content   = 3; // The actual comment text
+}
+
+// Used to retrieve a specific comment by ID
+message GetCommentRequest {
+  string comment_id = 1;
+}
+
+// Fetches all comments for a given post
+message GetPostCommentsRequest {
+  string post_id = 1;
+}
+
+// Represents a comment returned from the service
+message CommentResponse {
+  string comment_id = 1;
+  string post_id    = 2;
+  string user_id    = 3;
+  string content    = 4;
+  string create_at  = 5; // ISO 8601 UTC timestamp (e.g. "2025-06-28T15:00:00Z")
+}
+
+// Response containing multiple comments
+message CommentListResponse {
+  repeated CommentResponse comments = 1;
+}

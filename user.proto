@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package user;
+
+// gRPC service for user management and OAuth integration
+service UserService {
+  // Retrieves a user by their ID
+  rpc GetUser (GetUserRequest) returns (UserResponse);
+
+  // Finds an existing user by email or creates one (used in OAuth flow)
+  rpc FindOrCreateOAuthUser (OAuthUserRequest) returns (UserResponse);
+}
+
+// Request to fetch a user by ID
+message GetUserRequest {
+  string id = 1; // Unique user ID
+}
+
+// Request to find or create a user during OAuth login
+message OAuthUserRequest {
+  string username   = 1; // Display name (can come from provider)
+  string email      = 2; // Email address (usually unique)
+  string password   = 3; // Optional or generated (used if fallback auth needed)
+  string avatar_url = 4; // URL to user avatar or profile image
+}
+
+// Unused in service methods — could be removed if not used
+message FindByEmailRequest {
+  string email = 1;
+}
+
+// Response representing a user
+message UserResponse {
+  string id         = 1;
+  string username   = 2;
+  string email      = 3;
+  string avatar_url = 4;
+}

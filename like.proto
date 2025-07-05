@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+package like;
+
+// gRPC service for managing likes on posts and comments
+service LikeService {
+  // Toggles like status for a post (like or unlike)
+  rpc LikePost (PostLikeRequest) returns (PostLikeResponse);
+
+  // Returns total like count for a post
+  rpc GetPostLikeCount (PostLikeCountRequest) returns (PostLikeResponse);
+
+  // Returns all posts liked by a specific user
+  rpc GetUserPostLikes (UserPostLikesRequest) returns (UserPostLikeList);
+
+  // Toggles like status for a comment
+  rpc LikeComment (CommentLikeRequest) returns (CommentLikeResponse);
+
+  // Returns total like count for a comment
+  rpc GetCommentLikeCount (CommentLikeCountRequest) returns (CommentLikeResponse);
+
+  // Returns all comments liked by a specific user
+  rpc GetUserCommentLikes (UserCommentLikesRequest) returns (UserCommentLikeList);
+}
+
+// --- Post likes ---
+
+// Request to like or unlike a post
+message PostLikeRequest {
+  string post_id = 1;
+  string user_id = 2;
+}
+
+// Request to get like count for a post
+message PostLikeCountRequest {
+  string post_id = 1;
+}
+
+// Request to get all posts liked by a user
+message UserPostLikesRequest {
+  string user_id = 1;
+}
+
+// Response with post ID and total like count
+message PostLikeResponse {
+  string post_id = 1;
+  int64 count    = 2;
+}
+
+// Response with a list of liked posts and their like counts
+message UserPostLikeList {
+  repeated PostLikeResponse likes = 1;
+}
+
+// --- Comment likes ---
+
+// Request to like or unlike a comment
+message CommentLikeRequest {
+  string comment_id = 1;
+  string user_id    = 2;
+}
+
+// Request to get like count for a comment
+message CommentLikeCountRequest {
+  string comment_id = 1;
+}
+
+// Request to get all comments liked by a user
+message UserCommentLikesRequest {
+  string user_id = 1;
+}
+
+// Response with comment ID and total like count
+message CommentLikeResponse {
+  string comment_id = 1;
+  int64 count       = 2;
+}
+
+// Response with a list of liked comments and their like counts
+message UserCommentLikeList {
+  repeated CommentLikeResponse likes = 1;
+}

@@ -7,7 +7,7 @@ service PostService {
   // Creates a new post authored by a user
   rpc CreatePost (CreatePostRequest) returns (PostResponse);
 
-  // Returns the post by its ID
+  // Returns the post by its UUID
   rpc GetPost (GetPostRequest) returns (PostResponse);
 
   // Returns all posts created by the user
@@ -16,25 +16,25 @@ service PostService {
 
 // Request to create a new post
 message CreatePostRequest {
-  string user_id = 1; // ID of the post's author
+  string user_id = 1; // UUID of the post's author
   string title   = 2; // Title of the post
   string content = 3; // Content body of the post
 }
 
-// Request to get a post by ID
+// Request to get a post by UUID
 message GetPostRequest {
-  string post_id = 1; // ID of the post
+  string post_id = 1; // UUID of the post
 }
 
 // Request to get all posts by a specific user
 message UserPostRequest {
-  string user_id = 1; // ID of the author
+  string user_id = 1; // UUID of the author
 }
 
 // Response representing a post object
 message PostResponse {
-  string post_id   = 1; // ID of the post
-  string user_id   = 2; // ID of the comment's author
+  string post_id   = 1; // UUID of the post
+  string user_id   = 2; // UUID of the comment's author
   string title     = 3; // Title of the post
   string content   = 4; // Content body of the post
   string create_at = 5; // ISO 8601 timestamp (e.g., "2025-06-28T19:00:00Z")

@@ -7,43 +7,43 @@ service CommentService {
   // Creates a new comment on a post
   rpc CreateComment (CreateCommentRequest) returns (CommentResponse);
 
-  // Returns the comment by its ID
+  // Returns the comment by its UUID
   rpc GetComment (GetCommentRequest) returns (CommentResponse);
 
-  // Returns all comments on the post by its ID
+  // Returns all comments on the post by its UUID
   rpc GetPostComments (GetPostCommentsRequest) returns (CommentListResponse);
 
-  // Returns all user's comments by his ID
+  // Returns all user's comments by his UUID
   rpc GetUserComments (GetUserCommentsRequest) returns (CommentListResponse);
 }
 
 // Used to create a new comment
 message CreateCommentRequest {
-  string post_id   = 1; // ID of the post
-  string user_id   = 2; // ID of the comment's author
+  string post_id   = 1; // UUID of the post
+  string user_id   = 2; // UUID of the comment's author
   string content   = 3; // The comment text
 }
 
 // Request to get the comment
 message GetCommentRequest {
-  string comment_id = 1; // ID of the comment
+  string comment_id = 1; // UUID of the comment
 }
 
 // Request to get all comments of the post
 message GetPostCommentsRequest {
-  string post_id = 1; // ID of the post
+  string post_id = 1; // UUID of the post
 }
 
 // Request to get all comments of the user
 message GetUserCommentsRequest {
-  string user_id = 1; // ID of the comments' author
+  string user_id = 1; // UUID of the comments' author
 }
 
 // Response to return comment
 message CommentResponse {
-  string comment_id = 1; // ID of the comment
-  string post_id    = 2; // ID of the post
-  string user_id    = 3; // ID of the comment's author
+  string comment_id = 1; // UUID of the comment
+  string post_id    = 2; // UUID of the post
+  string user_id    = 3; // UUID of the comment's author
   string content    = 4; // The comment text
   string create_at  = 5; // ISO 8601 UTC timestamp (e.g. "2025-06-28T15:00:00Z")
 }

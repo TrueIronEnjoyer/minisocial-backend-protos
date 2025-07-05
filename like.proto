@@ -25,23 +25,23 @@ service LikeService {
 
 // Request to like or unlike a post
 message PostLikeRequest {
-  string post_id = 1; // ID of the post the like for
-  string user_id = 2; // ID of the user liking the post
+  string post_id = 1; // UUID of the post the like for
+  string user_id = 2; // UUID of the user liking the post
 } 
 
 // Request to get like count for a post
 message PostLikeCountRequest {
-  string post_id = 1; // ID of the post, whose the number of likes you need
+  string post_id = 1; // UUID of the post, whose the number of likes you need
 }
 
 // Request to get all posts liked by a user
 message UserPostLikesRequest {
-  string user_id = 1; // ID of the user wrote the comments
+  string user_id = 1; // UUID of the user wrote the comments
 }
 
-// Response with post ID and total like count
+// Response with post UUID and total like count
 message PostLikeResponse {
-  string post_id = 1; // ID of the post
+  string post_id = 1; // UUID of the post
   int64 count    = 2; // Count of likes
 }
 
@@ -52,23 +52,23 @@ message UserPostLikeList {
 
 // Request to like or unlike a comment
 message CommentLikeRequest {
-  string comment_id = 1; // ID of the comment
-  string user_id    = 2; // ID of the user
+  string comment_id = 1; // UUID of the comment
+  string user_id    = 2; // UUID of the user
 }
 
 // Request to get like count for a comment
 message CommentLikeCountRequest {
-  string comment_id = 1; // ID of the comment
+  string comment_id = 1; // UUID of the comment
 }
 
 // Request to get all comments liked by a user
 message UserCommentLikesRequest {
-  string user_id = 1; // ID of the user
+  string user_id = 1; // UUID of the user
 }
 
-// Response with comment ID and total like count
+// Response with comment UUID and total like count
 message CommentLikeResponse {
-  string comment_id = 1; // ID of the comment
+  string comment_id = 1; // UUID of the comment
   int64 count       = 2; // Count of likes
 }
 

@@ -4,7 +4,7 @@ package user;
 
 // gRPC service for user management and OAuth integration
 service UserService {
-  // Retrieves a user by their ID
+  // Returns the user by his ID
   rpc GetUser (GetUserRequest) returns (UserResponse);
 
   // Finds an existing user by email or creates one (used in OAuth flow)
@@ -13,7 +13,7 @@ service UserService {
 
 // Request to fetch a user by ID
 message GetUserRequest {
-  string id = 1; // Unique user ID
+  string user_id = 1; // ID of the user
 }
 
 // Request to find or create a user during OAuth login
@@ -26,13 +26,13 @@ message OAuthUserRequest {
 
 // Unused in service methods — could be removed if not used
 message FindByEmailRequest {
-  string email = 1;
+  string email = 1; // Email of the user
 }
 
 // Response representing a user
 message UserResponse {
-  string id         = 1;
-  string username   = 2;
-  string email      = 3;
-  string avatar_url = 4;
+  string user_id    = 1; // ID of the user
+  string username   = 2; // Username of the user
+  string email      = 3; // Email of the user
+  string avatar_url = 4; // Url on avatar of the user
 }

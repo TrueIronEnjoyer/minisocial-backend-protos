@@ -10,73 +10,69 @@ service LikeService {
   // Returns total like count for a post
   rpc GetPostLikeCount (PostLikeCountRequest) returns (PostLikeResponse);
 
-  // Returns all posts liked by a specific user
+  // Returns all posts liked by a the user
   rpc GetUserPostLikes (UserPostLikesRequest) returns (UserPostLikeList);
 
-  // Toggles like status for a comment
+  // Toggles like status for a comment (like or unlike)
   rpc LikeComment (CommentLikeRequest) returns (CommentLikeResponse);
 
   // Returns total like count for a comment
   rpc GetCommentLikeCount (CommentLikeCountRequest) returns (CommentLikeResponse);
 
-  // Returns all comments liked by a specific user
+  // Returns all comments liked by a the user
   rpc GetUserCommentLikes (UserCommentLikesRequest) returns (UserCommentLikeList);
 }
 
-// --- Post likes ---
-
 // Request to like or unlike a post
 message PostLikeRequest {
-  string post_id = 1;
-  string user_id = 2;
-}
+  string post_id = 1; // ID of the post the like for
+  string user_id = 2; // ID of the user liking the post
+} 
 
 // Request to get like count for a post
 message PostLikeCountRequest {
-  string post_id = 1;
+  string post_id = 1; // ID of the post, whose the number of likes you need
 }
 
 // Request to get all posts liked by a user
 message UserPostLikesRequest {
-  string user_id = 1;
+  string user_id = 1; // ID of the user wrote the comments
 }
 
 // Response with post ID and total like count
 message PostLikeResponse {
-  string post_id = 1;
-  int64 count    = 2;
+  string post_id = 1; // ID of the post
+  int64 count    = 2; // Count of likes
 }
 
 // Response with a list of liked posts and their like counts
 message UserPostLikeList {
-  repeated PostLikeResponse likes = 1;
+  repeated PostLikeResponse likes = 1; // Numbers likes of the posts
 }
-
-// --- Comment likes ---
 
 // Request to like or unlike a comment
 message CommentLikeRequest {
-  string comment_id = 1;
-  string user_id    = 2;
+  string comment_id = 1; // ID of the comment
+  string user_id    = 2; // ID of the user
 }
 
 // Request to get like count for a comment
 message CommentLikeCountRequest {
-  string comment_id = 1;
+  string comment_id = 1; // ID of the comment
 }
 
 // Request to get all comments liked by a user
 message UserCommentLikesRequest {
-  string user_id = 1;
+  string user_id = 1; // ID of the user
 }
 
 // Response with comment ID and total like count
 message CommentLikeResponse {
-  string comment_id = 1;
-  int64 count       = 2;
+  string comment_id = 1; // ID of the comment
+  int64 count       = 2; // Count of likes
 }
 
 // Response with a list of liked comments and their like counts
 message UserCommentLikeList {
-  repeated CommentLikeResponse likes = 1;
+  repeated CommentLikeResponse likes = 1; // Numbers likes of the comments
 }
